@@ -33,7 +33,6 @@ images:
 # Optional settings (recommended)
 options:
   logging: CLOUD_LOGGING_ONLY
-  machineType: E2_HIGHCPU_8
 
 # Optional substitutions (handy if you want to customize later)
 substitutions:
