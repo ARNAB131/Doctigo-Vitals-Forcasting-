@@ -1,18 +1,15 @@
-# -------------------------------
-# Doctigo Vitals — Google Cloud Build Safe Dockerfile
-# -------------------------------
+# ✅ Final Google Cloud Build–Safe Dockerfile
 FROM python:3.12-bullseye
 
-# Install system-level build dependencies
+# Install all required system-level dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     gcc \
     g++ \
     make \
     cmake \
-    pkg-config \
-    libjpeg-dev \
     zlib1g-dev \
+    libjpeg-dev \
     libfreetype6-dev \
     libopenblas-dev \
     liblapack-dev \
@@ -28,13 +25,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . /app
 
-# Upgrade pip and install dependencies
 RUN pip install --upgrade pip setuptools wheel
-RUN pip install pandas numpy PyMuPDF pillow plotly streamlit scikit-learn
+RUN pip install -r requirements.txt
 
-# Expose Streamlit port
 EXPOSE 8080
 ENV PORT=8080
 
-# Run Streamlit app
 CMD ["streamlit", "run", "app.py", "--server.port=8080", "--server.address=0.0.0.0"]
